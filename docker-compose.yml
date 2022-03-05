@@ -1,0 +1,22 @@
+version: '3.8' # docker-compose version
+services:
+  testdb:
+    image: mongo # source image name
+    container_name: 'testdb' # give your container a name
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+    # - test-db-data:/data/db
+      - ../src/mongodb/data/db:/data/db
+      # - ./mongo-init-test.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    environment:
+      - MONGO_INITDB_DATABASE=database1 # database name you want to make
+      - MONGO_INITDB_ROOT_USERNAME=admin # set your container root user
+      - MONGO_INITDB_ROOT_PASSWORD=password # set your container root password
+
+# volumes:
+#   test-db-data:
+#     external: true
+#     name: test-db-data
+
